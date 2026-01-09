@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【買収検討分析】飲食求人なび - 戦略的買収レポート</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Chosen Palette: Modern Slate & Electric Indigo -->
+    <!-- 
+         Style focus: High contrast text, Generous whitespace, clean typography.
+    -->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+        body { 
+            font-family: 'Inter', 'Noto Sans JP', sans-serif; 
+            background-color: #f8fafc; 
+            color: #0f172a; /* Slate-900 for better base contrast */
+            line-height: 1.8;
+        }
+        
+        /* Chart Container Styling */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%; /* Let it fill the card padding */
+            height: 350px;
+            max-height: 400px;
+            margin: 0 auto;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Card Styling - More Modern */
+        .content-card { 
+            background: white; 
+            border-radius: 1.5rem; /* rounded-3xl */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); /* Soft shadow */
+            padding: 3rem; /* p-12 equivalent */
+            border: 1px solid rgba(226, 232, 240, 0.8); 
+            transition: transform 0.3s ease;
+        }
+        
+        /* Animation Classes */
+        .fade-in-up { animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        
+        /* Section Number Styling */
+        .section-num {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            opacity: 0.08; /* Slightly lighter */
+            color: #000;
+            font-size: 5rem;
+            line-height: 1;
+            position: absolute;
+            top: -2.5rem;
+            left: -1rem;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Question List Styling */
+        .q-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="antialiased bg-slate-50 selection:bg-indigo-100 selection:text-indigo-900">
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-6 lg:px-8 py-20 space-y-32">
+
+        <!-- SECTION 1: EXECUTIVE SUMMARY -->
+        <section id="summary" class="scroll-mt-32 fade-in-up relative">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-block px-4 py-1.5 rounded-full bg-slate-200 text-slate-700 text-xs font-bold tracking-widest uppercase mb-6">Confidential Analysis</div>
+                <h1 class="text-5xl font-extrabold text-slate-900 tracking-tight mb-8 leading-tight">
+                    『飲食求人なび』<br>買収検討分析レポート
+                </h1>
+                <p class="text-xl text-slate-700 leading-relaxed font-medium">
+                    本案件は、既存の人材紹介事業の買収ではなく、<br>
+                    将来の<span class="font-bold text-indigo-700 border-b-4 border-indigo-200">「AI採用プラットフォーム」構築のための資産獲得投資</span><br>として評価すべきです。
+                </p>
+            </div>
+
+            <!-- Verdict Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1: Verdict -->
+                <div class="bg-white rounded-3xl p-8 shadow-xl shadow-teal-500/10 border border-teal-100 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-teal-50 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-110"></div>
+                    <div class="relative z-10">
+                        <div class="text-xs font-bold text-teal-700 uppercase tracking-widest mb-4">判定結果</div>
+                        <div class="text-3xl font-extrabold text-slate-900 mb-2">条件付き<br>「買い」</div>
+                        <p class="text-sm text-slate-600 font-medium mt-4 leading-relaxed">技術検証をクリアし、適正価格へ誘導できればGoサイン。</p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Valuation Gap -->
+                <div class="bg-white rounded-3xl p-8 shadow-xl shadow-rose-500/10 border border-rose-100 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-rose-50 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-110"></div>
+                    <div class="relative z-10">
+                        <div class="text-xs font-bold text-rose-600 uppercase tracking-widest mb-4">価格乖離 (要交渉)</div>
+                        <div class="flex items-baseline gap-3 mb-2">
+                            <div class="text-4xl font-extrabold text-slate-900">4,000</div>
+                            <div class="text-sm font-bold text-slate-500">万円</div>
+                        </div>
+                        <div class="text-sm text-slate-400 font-bold line-through decoration-rose-400 decoration-2 mb-4">売り手提示額</div>
+                        <div class="inline-flex items-center px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold border border-slate-200">
+                            目標: ~2,000万円
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Key Asset -->
+                <div class="bg-white rounded-3xl p-8 shadow-xl shadow-indigo-500/10 border border-indigo-100 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-110"></div>
+                    <div class="relative z-10">
+                        <div class="text-xs font-bold text-indigo-700 uppercase tracking-widest mb-4">最大の獲得資産</div>
+                        <div class="text-3xl font-extrabold text-slate-900 mb-2">老舗ドメイン</div>
+                        <p class="text-sm text-slate-600 font-medium mt-4 leading-relaxed">運用歴17年。広告費ゼロでAI開発の実験場として機能。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: STRATEGIC PIVOT -->
+        <section id="strategy" class="scroll-mt-32 relative fade-in-up delay-100">
+            <span class="section-num">02</span>
+            <div class="mb-12 pl-12">
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-6">
+                    市場環境の激変と<br>AI転換戦略
+                </h2>
+                <p class="text-lg text-slate-700 max-w-2xl font-medium leading-relaxed">
+                    本買収の真の狙いは、単なる既存事業の拡大ではありません。<br>
+                    今後予測される「ホワイトカラー崩壊とブルーカラー流入」という地殻変動に備え、今のうちに<strong class="text-indigo-700 font-extrabold bg-indigo-50 px-2 rounded">「選別（スクリーニング）に特化したAIインフラ」</strong>を構築することにあります。
+                </p>
+            </div>
+            
+            <!-- Comparison Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Current State -->
+                <div class="bg-white rounded-3xl shadow-lg shadow-slate-200/50 p-10 border border-slate-200 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center text-3xl mb-6">😫</div>
+                    <h3 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-2">現在</h3>
+                    <h4 class="text-2xl font-bold text-slate-800 mb-4">人手不足時代</h4>
+                    <p class="text-slate-600 mb-8 leading-loose text-sm font-medium">
+                        応募ゼロの状態。<br>
+                        とにかく母集団形成にコストがかかるフェーズ。
+                    </p>
+                    <div class="mt-auto w-full py-4 bg-slate-100 rounded-xl text-slate-700 font-bold text-sm tracking-wide">
+                        課題: 集客 (Marketing)
+                    </div>
+                </div>
+
+                <!-- Future State -->
+                <div class="bg-gradient-to-b from-indigo-700 to-indigo-800 rounded-3xl shadow-xl shadow-indigo-500/30 p-10 text-white flex flex-col items-center text-center relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIvPjwvc3ZnPg==')] opacity-20"></div>
+                    <div class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-inner">⚡️</div>
+                    <h3 class="text-sm font-bold text-indigo-200 uppercase tracking-widest mb-2">未来 (当社が目指す姿)</h3>
+                    <h4 class="text-2xl font-bold text-white mb-4">選考パンク時代</h4>
+                    <p class="text-indigo-100 mb-8 leading-loose text-sm font-medium">
+                        大量の応募が殺到。<br>
+                        AIが瞬時に100人をランク付けし、3人を見抜く。
+                    </p>
+                    <div class="mt-auto w-full py-4 bg-white text-indigo-800 rounded-xl font-bold text-sm tracking-wide shadow-lg">
+                        課題: 選別 (Screening)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2.5: AI/SaaS MARKET FORECAST (NEW) -->
+        <section id="forecast" class="scroll-mt-32 relative fade-in-up delay-200">
+            <span class="section-num text-slate-200">2.5</span>
+            <div class="mb-12 pl-12">
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-6">AI/SaaS市場予測 (3ヶ年)</h2>
+                <p class="text-lg text-slate-700 max-w-3xl font-medium leading-relaxed">
+                    「AIがSaaSを駆逐する」と言われる中、なぜ飲食特化型なのか？<br>
+                    <strong>汎用SaaSは淘汰されますが、独自データを持つ「Vertical AI（特化型）」は逆に価値が爆増します。</strong>
+                </p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-200 overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2">
+                    <!-- Forecast Chart -->
+                    <div class="p-10 border-b lg:border-b-0 lg:border-r border-slate-200">
+                        <h3 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-8 text-center">生存戦略: 汎用 vs 特化型</h3>
+                        <div class="chart-container">
+                            <canvas id="marketForecastChart"></canvas>
+                        </div>
+                        <p class="text-center text-xs text-slate-400 mt-4">※AIの進化により、データを持たない「ただのツール」は価値を失う。</p>
+                    </div>
+
+                    <!-- Forecast Narrative -->
+                    <div class="p-10 bg-slate-50/50 flex flex-col justify-center space-y-8">
+                        <div class="space-y-6">
+                            <!-- Year 1 -->
+                            <div class="flex gap-4">
+                                <div class="w-16 font-extrabold text-slate-400">Year 1</div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-slate-900 mb-1">SaaSの冬 (淘汰)</h4>
+                                    <p class="text-sm text-slate-600 font-medium">
+                                        「AIラッパー」と呼ばれる薄いSaaSが淘汰される。生き残るのは<strong>「独自データ」を持つ企業</strong>のみ。
+                                        <br><span class="text-indigo-600 font-bold text-xs">→ 我々は17年分の独自データで「堀」を作る。</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Year 2 -->
+                            <div class="flex gap-4">
+                                <div class="w-16 font-extrabold text-indigo-400">Year 2</div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-indigo-900 mb-1">エージェントの台頭</h4>
+                                    <p class="text-sm text-slate-600 font-medium">
+                                        「人が使うツール」から「AIが代行するエージェント」へ。ITリテラシーの低い飲食現場こそ、<strong>操作不要のAI代行</strong>が刺さる。
+                                        <br><span class="text-indigo-600 font-bold text-xs">→ 自動選考RPOが市場標準になる。</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Year 3 -->
+                            <div class="flex gap-4">
+                                <div class="w-16 font-extrabold text-teal-500">Year 3</div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-teal-800 mb-1">Vertical AIの勝利</h4>
+                                    <p class="text-sm text-slate-600 font-medium">
+                                        汎用AIは現場の「泥臭い調整」ができない。シフト調整や相性判断など、特化データを持つ我々だけが生き残る。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: ASSET AUDIT -->
+        <section id="audit" class="scroll-mt-32 relative fade-in-up delay-300">
+            <span class="section-num">03</span>
+            <div class="mb-12 pl-12">
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-6">資産査定 (Due Diligence)</h2>
+                <p class="text-lg text-slate-700 max-w-3xl font-medium leading-relaxed">
+                    表面上の数字（利益3,000万円）に惑わされてはいけません。
+                    詳細分析の結果、<strong>財務には大きな「化粧」</strong>があり、一方で<strong>Web資産には「磨けば光る原石」としてのポテンシャル</strong>があります。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Financial Analysis -->
+                <div class="content-card">
+                    <div class="flex justify-between items-center mb-10">
+                        <h3 class="text-xl font-bold text-slate-800">収益構造の真実</h3>
+                        <span class="px-4 py-1.5 bg-rose-50 text-rose-700 text-xs font-bold tracking-wider uppercase rounded-full border border-rose-200">要警戒</span>
+                    </div>
+                    <div class="mb-8">
+                        <div class="chart-container">
+                            <canvas id="financialChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="border-t border-slate-200 pt-6">
+                        <p class="text-sm text-slate-700 leading-relaxed font-medium">
+                            <strong class="text-slate-900 block mb-2 text-base">分析インサイト</strong>
+                            当期純利益の大半は「雑収入（一時的）」です。本業の実力値（営業利益）は約500万円に過ぎません。売り手の提示額4,000万円の根拠はこの雑収入に依存しており、企業価値評価から除外すべきです。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Media Potential -->
+                <div class="content-card">
+                    <div class="flex justify-between items-center mb-10">
+                        <h3 class="text-xl font-bold text-slate-800">ドメイン資産の伸びしろ</h3>
+                        <span class="px-4 py-1.5 bg-teal-50 text-teal-700 text-xs font-bold tracking-wider uppercase rounded-full border border-teal-200">ポテンシャル大</span>
+                    </div>
+                    <div class="mb-8">
+                        <div class="chart-container">
+                            <canvas id="domainChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="border-t border-slate-200 pt-6">
+                        <p class="text-sm text-slate-700 leading-relaxed font-medium">
+                            <strong class="text-slate-900 block mb-2 text-base">分析インサイト</strong>
+                            ドメイン年齢（信頼性）は高い評価ですが、被リンク数が極端に少ない状態です。これはSEO対策が放置されていた証拠であり、当社のリソースでコンテンツ拡充を行えば、急成長する余地（伸びしろ）しかありません。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: GROWTH STRATEGY -->
+        <section class="scroll-mt-32 relative fade-in-up delay-400">
+            <div class="text-center mb-16">
+                <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest mb-2 block">Synergy & Growth</span>
+                <h2 class="text-3xl font-extrabold text-slate-900">シナジー効果による成長戦略</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <!-- Strategy 1 -->
+                <div class="bg-white p-10 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-200 hover:border-indigo-300 transition-colors">
+                    <div class="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center text-2xl mb-6 text-indigo-600">🌏</div>
+                    <h3 class="font-bold text-lg text-slate-900 mb-4">エリア展開の拡大（国内）</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed font-medium">
+                        現在は関東偏重ですが、当社の<strong>大阪・名古屋・九州の国内拠点</strong>リソースを即時投入。地方エリアの求人案件を網羅することで地方SEOを制圧し、媒体全体のドメインパワーを底上げします。
+                    </p>
+                </div>
+
+                <!-- Strategy 4 (Revised Focus on Hiring Synergy) -->
+                <div class="bg-white p-10 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-200 hover:border-emerald-300 transition-colors">
+                    <div class="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-2xl mb-6 text-emerald-600">🏢</div>
+                    <h3 class="font-bold text-lg text-slate-900 mb-4">自社採用コストの削減（国内・海外）</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed font-medium">
+                        当社の飲食事業（国内・海外店舗）における採用を本媒体へ切り替え、<strong>年間数千万円規模の採用費・紹介料を削減</strong>します。特にコストが高い海外シェフ採用の内製化は大きな利益貢献となります。<br>
+                        <span class="text-xs text-emerald-700 mt-3 block font-bold">※併せて渋谷オフィス統合による家賃削減（年260万）も実施。</span>
+                    </p>
+                </div>
+
+                <!-- Strategy 2 -->
+                <div class="bg-white p-10 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-200 hover:border-teal-300 transition-colors">
+                    <div class="w-12 h-12 bg-teal-50 rounded-2xl flex items-center justify-center text-2xl mb-6 text-teal-600">📱</div>
+                    <h3 class="font-bold text-lg text-slate-900 mb-4">サイトリニューアル</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed font-medium">
+                        陳腐化したシステムを刷新します。CMS導入でコンテンツマーケティング（ブログ戦略）を加速させ、スマホUI改善で応募率を高めます。
+                    </p>
+                </div>
+
+                <!-- Strategy 3 -->
+                <div class="bg-white p-10 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-200 hover:border-purple-300 transition-colors">
+                    <div class="w-12 h-12 bg-purple-50 rounded-2xl flex items-center justify-center text-2xl mb-6 text-purple-600">💰</div>
+                    <h3 class="font-bold text-lg text-slate-900 mb-4">マネタイズ多角化</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed font-medium">
+                        「掲載費サブスク」で安定収益を確保しつつ、「AI活用型RPO」と「SaaS販売」で高収益モデルへ転換します。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Payback Period Simulation -->
+            <div class="bg-slate-900 rounded-[2rem] p-10 md:p-14 text-white relative overflow-hidden shadow-2xl">
+                <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-b from-indigo-500 to-purple-500 rounded-full blur-[100px] opacity-20 -mr-32 -mt-32 pointer-events-none"></div>
+                
+                <div class="relative z-10 flex flex-col lg:flex-row gap-12 items-center">
+                    <div class="lg:w-1/2">
+                        <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-3 block">Payback Simulation</span>
+                        <h3 class="text-3xl font-bold mb-6">投資回収シミュレーション</h3>
+                        <p class="text-slate-300 leading-relaxed mb-8 font-medium">
+                            適正価格（2,000万円）での買収を前提とした場合、シナジー効果（エリア拡大・RPO）に加え、<strong>「家賃削減と採用費削減」</strong>により、<strong>2.5年以内での早期回収</strong>が見込まれます。<br>3年目以降は、AI/SaaS事業が利益を牽引します。
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4 p-4 bg-white/10 rounded-xl border border-white/20">
+                                <div class="text-indigo-400 font-bold text-lg">Year 1</div>
+                                <div>
+                                    <div class="font-bold text-white text-sm mb-1">基盤構築・固定費削減</div>
+                                    <p class="text-xs text-slate-300 font-medium">オフィス統合による家賃削減と自社求人の無料化により、初年度から確実なコスト削減効果を創出。</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 p-4 bg-white/10 rounded-xl border border-white/20">
+                                <div class="text-teal-400 font-bold text-lg">Year 2</div>
+                                <div>
+                                    <div class="font-bold text-white text-sm mb-1">成長・回収フェーズ</div>
+                                    <p class="text-xs text-slate-300 font-medium">地方・海外展開とRPOが収益化。単年度利益が倍増し、投資回収が加速。</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 p-4 bg-white/10 rounded-xl border border-white/20">
+                                <div class="text-purple-400 font-bold text-lg">Year 3</div>
+                                <div>
+                                    <div class="font-bold text-white text-sm mb-1">SaaS転換フェーズ</div>
+                                    <p class="text-xs text-slate-300 font-medium">AIツールの外販開始。ストック収益が積み上がり投資回収完了。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:w-1/2 w-full">
+                        <div class="chart-container bg-white/5 p-4 rounded-2xl border border-white/10">
+                            <canvas id="paybackChart"></canvas>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <span class="inline-block px-4 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30">
+                                目標回収期間: 2.5年
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: VALUATION ANALYSIS -->
+        <section id="valuation" class="scroll-mt-32 relative fade-in-up">
+            <span class="section-num">04</span>
+            <div class="mb-12 pl-12">
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-6">価格分析：なぜ4,000万円は高いのか</h2>
+                <p class="text-lg text-slate-700 max-w-4xl font-medium leading-relaxed">
+                    売り手の提示額（4,000万円）と、実力値ベースの適正価格（約2,000万円）には大きな乖離があります。
+                    このギャップの正体は<strong>「一時的な雑収入」</strong>と<strong>「見落とされたリスクコスト」</strong>です。
+                </p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-200 overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2">
+                    <!-- Visual Logic -->
+                    <div class="p-10 border-b lg:border-b-0 lg:border-r border-slate-200">
+                        <h3 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-8 text-center">価格乖離の構造</h3>
+                        <div class="chart-container">
+                            <canvas id="valuationGapChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Text Logic -->
+                    <div class="p-10 bg-slate-50/50 flex flex-col justify-center space-y-8">
+                        <!-- Logic Block 1 -->
+                        <div class="flex gap-6">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-white border border-slate-300 flex items-center justify-center text-slate-500 font-bold text-lg shadow-sm">1</div>
+                            <div>
+                                <h4 class="text-lg font-bold text-slate-900 mb-2">雑収入の除外 (-1,500万円)</h4>
+                                <p class="text-slate-700 text-sm leading-relaxed font-medium">
+                                    決算書上の<strong>当期純利益は3,116万円</strong>ですが、その内訳には<strong>2,652万円もの雑収入（助成金等）</strong>が含まれています。これらは来期消滅するため、企業価値評価から除外するのがM&Aの鉄則です。
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Logic Block 2 -->
+                        <div class="flex gap-6">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-white border border-slate-300 flex items-center justify-center text-slate-500 font-bold text-lg shadow-sm">2</div>
+                            <div>
+                                <h4 class="text-lg font-bold text-slate-900 mb-2">再生コストの控除 (-500万円)</h4>
+                                <p class="text-slate-700 text-sm leading-relaxed font-medium">
+                                    <strong>売掛金1,122万円（月商の4ヶ月分）</strong>の滞留リスクや、システム改修費を考慮し、リスクプレミアムとして事前に価格から控除する必要があります。
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Conclusion Block -->
+                        <div class="bg-teal-50 p-6 rounded-2xl border border-teal-200">
+                            <h4 class="text-lg font-bold text-teal-800 mb-1">適正価格の結論: 2,012万円</h4>
+                            <p class="text-teal-700 text-sm font-bold leading-relaxed">
+                                純資産（455万円）＋ 実質営業利益（519万円） × 3年分 ≒ 2,012万円。<br>
+                                これが財務数値に基づいた本来の企業価値です。
+                            </p>
+                        </div>
+
+                        <!-- Risk Block -->
+                        <div class="bg-amber-50 p-6 rounded-2xl border border-amber-200">
+                             <div class="flex gap-3">
+                                <span class="text-xl">⚠️</span>
+                                <div>
+                                    <h4 class="text-sm font-bold text-amber-900 mb-1">交渉決裂リスク</h4>
+                                    <p class="text-amber-800 text-xs leading-relaxed font-medium">
+                                        売り手は提示額4,000万円を「譲れないライン」と設定している可能性が高く、2,000万円台の提示により<strong>即座に交渉決裂（Deal Breaker）となるリスク</strong>があります。
+                                    </p>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 5: QUESTIONS (NEW) -->
+        <section id="questions" class="scroll-mt-32 relative fade-in-up delay-400">
+            <span class="section-num">05</span>
+            <div class="mb-12 pl-12">
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-6">売り手への質問リスト</h2>
+                <p class="text-lg text-slate-700 max-w-3xl font-medium leading-relaxed">
+                    最終判断を下すために、面談で必ず確認すべき事項です。
+                    相手の回答次第で、「撤退」か「価格交渉」かのシナリオが決まります。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 gap-8">
+                <!-- TECH: Deal Breaker -->
+                <div class="content-card border-l-8 border-l-rose-500">
+                    <div class="mb-6">
+                        <span class="q-tag bg-rose-100 text-rose-700">最重要</span>
+                        <h3 class="text-xl font-bold text-slate-800">1. 技術・データ資産 (Deal Breaker)</h3>
+                        <p class="text-sm text-slate-600 mt-2 font-medium">AI開発の土台となるか？ NGなら資産価値ゼロ。</p>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="font-bold text-rose-600 w-8">Q1</div>
+                            <div>
+                                <p class="font-bold text-slate-900 mb-1">システムは完全自社開発ですか？</p>
+                                <p class="text-sm text-slate-600 font-medium">意図: ASP/パッケージならAI改造不可のため<span class="font-bold text-rose-600">大幅減額</span>。</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 border-t border-slate-200 pt-4">
+                            <div class="font-bold text-rose-600 w-8">Q2</div>
+                            <div>
+                                <p class="font-bold text-slate-900 mb-1">過去17年分のデータ（求職者・選考ログ）はRDB管理ですか？</p>
+                                <p class="text-sm text-slate-600 font-medium">意図: 紙/FAX管理ならデータ化コスト過多で<span class="font-bold text-rose-600">大幅減額</span>。</p>
+                            </div>
+                        </div>
+                         <div class="flex gap-4 border-t border-slate-200 pt-4">
+                            <div class="font-bold text-rose-600 w-8">Q3</div>
+                            <div>
+                                <p class="font-bold text-slate-900 mb-1">「不採用」理由のログは残っていますか？</p>
+                                <p class="text-sm text-slate-600 font-medium">意図: 教師データ不足なら開発遅延。<span class="font-bold text-amber-600">減額材料</span>。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FINANCIAL: Price Negotiation -->
+                <div class="content-card border-l-8 border-l-teal-400">
+                    <div class="mb-6">
+                        <span class="q-tag bg-teal-100 text-teal-700">価格交渉</span>
+                        <h3 class="text-xl font-bold text-slate-800">2. 財務・収益 (Valuation)</h3>
+                        <p class="text-sm text-slate-600 mt-2 font-medium">提示額4,000万円の根拠を崩す。</p>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="font-bold text-teal-600 w-8">Q4</div>
+                            <div>
+                                <p class="font-bold text-slate-900 mb-1">「雑収入(2,650万)」の具体的内訳は？</p>
+                                <p class="text-sm text-slate-600 font-medium">意図: 一時的な助成金なら企業価値から除外。<span class="font-bold text-teal-600">半値交渉の根拠</span>。</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 border-t border-slate-200 pt-4">
+                            <div class="font-bold text-teal-600 w-8">Q5</div>
+                            <div>
+                                <p class="font-bold text-slate-900 mb-1">売掛金の回収サイトと滞留状況は？</p>
+                                <p class="text-sm text-slate-600 font-medium">意図: 不良債権リスク分を価格から控除。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEGOTIATION SCENARIO -->
+                <div class="bg-slate-100 p-8 rounded-3xl border border-slate-200">
+                    <h3 class="font-bold text-slate-700 mb-4 text-center">交渉シナリオ (Battle Plan)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                            <div class="text-xs font-bold text-rose-600 uppercase tracking-widest mb-2">Scenario A: 技術NG</div>
+                            <p class="text-sm text-slate-700 mb-3 font-medium">システムがASP、またはデータが紙。</p>
+                            <div class="text-sm font-bold text-slate-800 bg-rose-50 p-3 rounded border border-rose-100">
+                                → 大幅な減額交渉へ<br>
+                                <span class="font-normal text-xs text-slate-600">※システム・データ価値を0円と見なし、ドメイン代のみ提示</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                            <div class="text-xs font-bold text-teal-600 uppercase tracking-widest mb-2">Scenario B: 技術OK・価格NG</div>
+                            <p class="text-sm text-slate-700 mb-3 font-medium">AI土台にはなるが、4,000万固守。</p>
+                            <div class="text-sm font-bold text-slate-800 bg-teal-50 p-3 rounded border border-teal-100">
+                                → 2,000万を指値提示<br>
+                                <span class="font-normal text-xs text-slate-600">※「雑収入除外」と「再生コスト」を根拠に説得</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: DECISION CHECKLIST -->
+        <section id="decision" class="scroll-mt-32 pb-32 relative fade-in-up">
+            <span class="section-num">06</span>
+            <div class="bg-slate-900 rounded-[2.5rem] p-12 lg:p-20 text-white shadow-2xl relative overflow-hidden">
+                <!-- Background decoration -->
+                <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-600 rounded-full blur-[120px] opacity-20 -mr-20 -mt-20 pointer-events-none"></div>
+
+                <div class="relative z-10">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl font-bold text-white mb-6">最終判断の「踏み絵」</h2>
+                        <p class="text-slate-300 max-w-2xl mx-auto text-lg font-medium leading-relaxed">
+                            AI戦略の土台として機能するか否か、以下の技術的条件は譲れません。<br>
+                            <strong>一つでも満たさない場合、AI開発は不可能であり、買収は見送るべきです。</strong>
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                        <!-- Check Item 1 -->
+                        <div class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 flex items-start hover:bg-white/15 transition-colors">
+                            <div class="text-3xl mr-6 opacity-90">🛠</div>
+                            <div>
+                                <h3 class="font-bold text-lg text-white mb-2">システムは自社所有か？</h3>
+                                <p class="text-sm text-slate-300 leading-relaxed font-medium">
+                                    ASPの場合、AI組込は不可。「リニューアルすれば解決」ですが、それは<strong>現システムに資産価値がない（=0円）</strong>ことを意味します。システム代として価格に含まれているなら<strong>大幅な減額交渉</strong>が必要です。
+                                    <span class="block mt-2 text-yellow-400 font-bold text-xs uppercase tracking-wider">ASPなら資産価値ゼロとみなす</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Check Item 2 -->
+                        <div class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 flex items-start hover:bg-white/15 transition-colors">
+                            <div class="text-3xl mr-6 opacity-90">💾</div>
+                            <div>
+                                <h3 class="font-bold text-lg text-white mb-2">データ（求職者・選考ログ）は構造化DB管理か？</h3>
+                                <p class="text-sm text-slate-300 leading-relaxed font-medium">
+                                    AI学習の核となる<strong>「求職者情報」と「選考履歴（合否）」</strong>が、MySQL等のRDBまたはCSVで抽出可能であること。<br>
+                                    PDF/画像/紙などの「非構造化データ」の場合、データ化に莫大なコストと時間がかかります。AI開発の遅れを考慮し、<strong>大幅な減額</strong>が必須です。
+                                    <span class="block mt-2 text-yellow-400 font-bold text-xs uppercase tracking-wider">非構造化なら大幅減額</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Check Item 3 -->
+                        <div class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 flex items-start hover:bg-white/15 transition-colors">
+                            <div class="text-3xl mr-6 opacity-90">📝</div>
+                            <div>
+                                <h3 class="font-bold text-lg text-white mb-2">不採用ログが存在するか？</h3>
+                                <p class="text-sm text-slate-300 leading-relaxed font-medium">
+                                    AIの学習には「なぜ不採用だったか」の教師データが不可欠です。
+                                    <span class="block mt-2 text-yellow-400 font-bold text-xs uppercase tracking-wider">NGなら大幅減額</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Check Item 4 -->
+                        <div class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 flex items-start hover:bg-white/15 transition-colors">
+                            <div class="text-3xl mr-6 opacity-90">🤝</div>
+                            <div>
+                                <h3 class="font-bold text-lg text-white mb-2">2,000万円前後で合意可能か？</h3>
+                                <p class="text-sm text-slate-300 leading-relaxed font-medium">
+                                    財務実態に見合わない高値掴みは避ける必要があります。
+                                    <span class="block mt-2 text-rose-400 font-bold text-xs uppercase tracking-wider">固守なら決裂覚悟</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-20 text-center">
+                        <div class="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full text-white font-bold text-lg shadow-lg shadow-teal-500/30 transform hover:scale-105 transition-transform duration-300">
+                            <span>全条件クリアの場合のみ</span>
+                            <span class="w-px h-6 bg-white/30 mx-2"></span>
+                            <span>買収実行 (GO)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: GLOSSARY (NEW) -->
+        <section id="glossary" class="scroll-mt-32 pb-20 relative fade-in-up delay-500">
+            <span class="section-num">07</span>
+            <div class="mb-12 pl-12">
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-6">IT・M&A用語集</h2>
+                <p class="text-lg text-slate-700 max-w-3xl font-medium leading-relaxed">
+                    本レポートで使用している専門用語の解説です。技術的な定義に加え、本件M&Aにおける「ビジネス上の意味合い」を記載しています。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Term 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-indigo-300 transition-colors">
+                    <h3 class="text-lg font-bold text-indigo-700 mb-2">SEO</h3>
+                    <p class="text-xs text-slate-400 mb-2 font-bold uppercase">Search Engine Optimization</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Google検索で上位表示させる技術。<br>
+                        <strong>意味合い：</strong>「Web上の立地戦略」。これに成功しているサイトは、広告費ゼロで客が集まる「駅前一等地」の価値がある。
+                    </p>
+                </div>
+
+                <!-- Term 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-indigo-300 transition-colors">
+                    <h3 class="text-lg font-bold text-indigo-700 mb-2">DR</h3>
+                    <p class="text-xs text-slate-400 mb-2 font-bold uppercase">Domain Rating</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        サイトの「信頼性スコア」。<br>
+                        <strong>意味合い：</strong>「老舗の暖簾（のれん）の信用力」。新規サイトがこのスコアを稼ぐには数年の歳月が必要なため、買う価値がある資産。
+                    </p>
+                </div>
+
+                <!-- Term 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-indigo-300 transition-colors">
+                    <h3 class="text-lg font-bold text-indigo-700 mb-2">ASP</h3>
+                    <p class="text-xs text-slate-400 mb-2 font-bold uppercase">Application Service Provider</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        他社のシステムを借りて運営すること。<br>
+                        <strong>意味合い：</strong>「賃貸マンション」。内装は変えられるが、壁を壊すような改造（AI導入）はできないため、資産価値は低い。
+                    </p>
+                </div>
+
+                <!-- Term 4 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-indigo-300 transition-colors">
+                    <h3 class="text-lg font-bold text-indigo-700 mb-2">RDB</h3>
+                    <p class="text-xs text-slate-400 mb-2 font-bold uppercase">Relational Database</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Excelのように整理されたデータ管理形式。<br>
+                        <strong>意味合い：</strong>「AIの良質な餌」。データがこの形式で保存されていれば、即座にAI開発に着手できる。
+                    </p>
+                </div>
+
+                <!-- Term 5 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-indigo-300 transition-colors">
+                    <h3 class="text-lg font-bold text-indigo-700 mb-2">SaaS</h3>
+                    <p class="text-xs text-slate-400 mb-2 font-bold uppercase">Software as a Service</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        ソフトを「売り切り」ではなく「月額課金」で提供するモデル。<br>
+                        <strong>意味合い：</strong>毎月決まった収益が入る「家賃収入」のようなビジネスモデル。企業価値が高く評価されやすい。
+                    </p>
+                </div>
+
+                <!-- Term 6 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-indigo-300 transition-colors">
+                    <h3 class="text-lg font-bold text-indigo-700 mb-2">RPO</h3>
+                    <p class="text-xs text-slate-400 mb-2 font-bold uppercase">Recruitment Process Outsourcing</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        採用業務の代行。<br>
+                        <strong>意味合い：</strong>面倒な選考作業を「丸投げ」される仕事。AIで自動化できれば、人件費がかからず利益率が跳ね上がる。
+                    </p>
+                </div>
+
+                <!-- Term 7 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-indigo-300 transition-colors">
+                    <h3 class="text-lg font-bold text-indigo-700 mb-2">CMS</h3>
+                    <p class="text-xs text-slate-400 mb-2 font-bold uppercase">Content Management System</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        ブログなどの記事投稿システム。<br>
+                        <strong>意味合い：</strong>「集客装置のエンジン」。これがないと、エンジニア以外はサイトを更新できず、SEO対策が進まない。
+                    </p>
+                </div>
+
+                <!-- Term 8 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-indigo-300 transition-colors">
+                    <h3 class="text-lg font-bold text-indigo-700 mb-2">Vertical AI</h3>
+                    <p class="text-xs text-slate-400 mb-2 font-bold uppercase">Vertical AI</p>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        特定業界（今回は飲食）に特化したAI。<br>
+                        <strong>意味合い：</strong>何でもできるChatGPT（汎用型）に対し、業界特有の事情に詳しい専門家AI。独自データを持つ企業だけが作れる「勝ち筋」。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JS Logic for Charts -->
+    <script>
+        // Common Chart Options - Cleaner look
+        Chart.defaults.font.family = "'Inter', 'Noto Sans JP', sans-serif";
+        Chart.defaults.color = '#475569'; // Slate-600 for chart labels
+        Chart.defaults.font.weight = 'bold';
+        
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: {
+                padding: 20
+            },
+            plugins: {
+                legend: { 
+                    position: 'bottom',
+                    labels: {
+                        usePointStyle: true,
+                        padding: 20,
+                        font: { size: 12, weight: 'bold' }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(15, 23, 42, 0.95)', // Darker slate
+                    padding: 12,
+                    cornerRadius: 8,
+                    titleFont: { size: 14, weight: 'bold' },
+                    bodyFont: { size: 13 },
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) return label.join('');
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { display: false },
+                    border: { display: false },
+                    ticks: { font: { weight: 'bold' } }
+                },
+                y: {
+                    grid: { color: '#e2e8f0' },
+                    border: { display: false },
+                    ticks: { font: { weight: 'bold' } }
+                }
+            }
+        };
+
+        // 1. Financial Structure Chart
+        const ctxFin = document.getElementById('financialChart').getContext('2d');
+        new Chart(ctxFin, {
+            type: 'bar',
+            data: {
+                labels: ['本業の利益', '雑収入(一時的)'],
+                datasets: [{
+                    label: '金額 (万円)',
+                    data: [519, 2652],
+                    backgroundColor: ['#6366f1', '#f43f5e'], // Indigo-500, Rose-500
+                    borderRadius: 8,
+                    barPercentage: 0.6
+                }]
+            },
+            options: {
+                ...commonOptions,
+                indexAxis: 'y', 
+                scales: { 
+                    x: { stacked: true, grid: { display: false } }, 
+                    y: { stacked: true, grid: { display: false } } 
+                }
+            }
+        });
+
+        // 2. Domain Potential Chart
+        const ctxDom = document.getElementById('domainChart').getContext('2d');
+        new Chart(ctxDom, {
+            type: 'bar',
+            data: {
+                labels: ['現在のDR(評価)', '現在の被リンク数', '潜在的ポテンシャル'],
+                datasets: [{
+                    label: 'スコア',
+                    data: [24, 49, 150],
+                    backgroundColor: ['#cbd5e1', '#f43f5e', '#2dd4bf'], 
+                    borderRadius: 8,
+                    barPercentage: 0.6
+                }]
+            },
+            options: {
+                ...commonOptions,
+                scales: { y: { beginAtZero: true, grid: { color: '#e2e8f0' } } }
+            }
+        });
+
+        // 2.5 Market Forecast Chart (New)
+        const ctxMarket = document.getElementById('marketForecastChart').getContext('2d');
+        new Chart(ctxMarket, {
+            type: 'line',
+            data: {
+                labels: ['現在 (Year 0)', 'Year 1', 'Year 2', 'Year 3'],
+                datasets: [
+                    {
+                        label: '汎用SaaS (Generic)',
+                        data: [100, 90, 60, 40],
+                        borderColor: '#94a3b8', // Slate-400 (Dying)
+                        backgroundColor: 'transparent',
+                        borderWidth: 3,
+                        borderDash: [5, 5],
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Vertical AI (特化型)',
+                        data: [100, 150, 250, 450],
+                        borderColor: '#6366f1', // Indigo-500 (Booming)
+                        backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                        borderWidth: 4,
+                        fill: true,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false } },
+                    y: { display: false } // Hide numbers, focus on trend
+                }
+            }
+        });
+
+        // 3. Valuation Gap Waterfall Chart
+        const ctxVal = document.getElementById('valuationGapChart').getContext('2d');
+        new Chart(ctxVal, {
+            type: 'bar',
+            data: {
+                labels: [['売り手', '提示額'], ['雑収入', '除外'], ['リスク', '控除'], ['適正', '価格']],
+                datasets: [{
+                    label: '金額 (万円)',
+                    data: [4000, 2500, 2000, 2000],
+                    backgroundColor: [
+                        '#f43f5e', // Rose
+                        '#cbd5e1', // Slate-300
+                        '#cbd5e1', // Slate-300
+                        '#2dd4bf'  // Teal
+                    ],
+                    borderRadius: 8,
+                    barPercentage: 0.6
+                }]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.raw.toLocaleString() + ' 万円';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 4. Payback Period Chart (New)
+        const ctxPayback = document.getElementById('paybackChart').getContext('2d');
+        new Chart(ctxPayback, {
+            type: 'line',
+            data: {
+                labels: ['Year 0', 'Year 1', 'Year 2', 'Year 3'],
+                datasets: [
+                    {
+                        label: '累積利益 (シナジー有)',
+                        data: [0, 400, 1700, 4200], // 0 -> 400 -> 1700 -> 4200 (Recover in 2.5y)
+                        borderColor: '#2dd4bf', // Teal
+                        backgroundColor: 'rgba(45, 212, 191, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: '投資回収ライン',
+                        data: [2000, 2000, 2000, 2000],
+                        borderColor: 'rgba(255, 255, 255, 0.3)',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        pointRadius: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        ticks: { color: '#e2e8f0', font: {weight: 'bold'} }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#e2e8f0', font: {weight: 'bold'} }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: '#e2e8f0', font: {weight: 'bold'} }
+                    },
+                    tooltip: {
+                        titleColor: '#fff',
+                        bodyColor: '#fff'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
